@@ -123,8 +123,10 @@ def main():
 
   for l in xp.lst:
     coord_lst = l['coordinates'].split(',')
-    l["lat"] = float(coord_lst[0])
-    l["lng"] = float(coord_lst[1])
+    #latitude and longitude are mixed in google's kml file
+    #so need to reorder it
+    l["lat"] = float(coord_lst[1])
+    l["lng"] = float(coord_lst[0])
     del l['coordinates']
 
     desc = l['description']
