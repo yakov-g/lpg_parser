@@ -124,7 +124,7 @@ def main():
   for l in xp.lst:
     coord_lst = l['coordinates'].split(',')
     l["lat"] = float(coord_lst[0])
-    l["lnt"] = float(coord_lst[1])
+    l["lng"] = float(coord_lst[1])
     del l['coordinates']
 
     desc = l['description']
@@ -137,13 +137,12 @@ def main():
 
   
   #print xp.lst
-  #print len(xp.lst)
   l = [{"a" : "b"}]
   d = json.dumps(xp.lst)
 
   f2 = open('output', 'w')
   f2.write(d)
-  #print xp.lst
+  print "Stations qty: ", len(xp.lst)
 
 if __name__ == "__main__":
    main()
