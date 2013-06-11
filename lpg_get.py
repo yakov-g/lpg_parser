@@ -134,9 +134,9 @@ def main():
     time_str = desc_lst[2]
     pos = time_str.find("<")
     time_str = time_str[:pos]
-    l["time"] = time_str
+    l["time"] = u"\u200e" + time_str
     del l['description']
-
+    l["name"] = u"\u200e" + l["name"]
   
   #print xp.lst
   l = [{"a" : "b"}]
