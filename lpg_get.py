@@ -143,12 +143,11 @@ def main():
   #print xp.lst
   d = json.dumps(xp.lst)
 
+
   f2 = open('output', 'w')
   f2.write(d)
   print "Stations qty: ", len(xp.lst)
   print datetime.utcnow()
-
-  
 
   mydata=[('op','1'),('time','987654321'), ('json', d)]    #The first is the var name the second is the value
   mydata=urllib.urlencode(mydata)
@@ -156,7 +155,15 @@ def main():
   req=urllib2.Request(p2, mydata)
   #req.add_header("Content-type", "application/x-www-form-urlencoded")
   page=urllib2.urlopen(req).read()
+  print page
 
+def get_data():
+  mydata=[('op','2'), ('id', 1409)]    #The first is the var name the second is the value
+  mydata=urllib.urlencode(mydata)
+  p2 = "http://lpg.site40.net/lpg_db_reload.php"
+  req=urllib2.Request(p2, mydata)
+  #req.add_header("Content-type", "application/x-www-form-urlencoded")
+  page=urllib2.urlopen(req).read()
   print page
   s = page[ : page.find("<")]
   print s
@@ -167,4 +174,5 @@ def main():
   print data['time']
 
 if __name__ == "__main__":
-   main()
+   #main()
+   get_data()
