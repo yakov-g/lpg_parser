@@ -2,6 +2,8 @@
 
 import xml.parsers.expat
 import json, sys
+import urllib2, urllib
+from datetime import datetime
 
 ST_NONE = "ST_NONE"
 ST_PLCMRK = "ST_PLCMRK"
@@ -139,12 +141,30 @@ def main():
     l["name"] = u"\u200e" + l["name"]
   
   #print xp.lst
-  l = [{"a" : "b"}]
   d = json.dumps(xp.lst)
 
   f2 = open('output', 'w')
   f2.write(d)
   print "Stations qty: ", len(xp.lst)
+  print datetime.utcnow()
+
+  
+
+  mydata=[('op','1'),('time','987654321'), ('json', d)]    #The first is the var name the second is the value
+  mydata=urllib.urlencode(mydata)
+  p2 = "http://lpg.site40.net/lpg_db_reload.php"
+  req=urllib2.Request(p2, mydata)
+  #req.add_header("Content-type", "application/x-www-form-urlencoded")
+  page=urllib2.urlopen(req).read()
+
+  print page
+  s = page[ : page.find("<")]
+  print s
+
+  data = json.loads(s)
+  print data['id']
+  print data['name']
+  print data['time']
 
 if __name__ == "__main__":
    main()

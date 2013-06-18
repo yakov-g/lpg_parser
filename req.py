@@ -2,7 +2,7 @@ import urllib2, urllib
 
 import json
 
-mydata=[('one','1'),('two','2')]    #The first is the var name the second is the value
+mydata=[('op','1'),('time','987654321')]    #The first is the var name the second is the value
 mydata=urllib.urlencode(mydata)
 path='http://localhost/new.php'    #the url you want to POST to
 p = "http://api.androidhive.info/android_connect/get_all_products.php"
