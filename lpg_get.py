@@ -158,15 +158,19 @@ def main():
   print page
 
 def get_data():
-  mydata = [('op','get_timestamp'), ('id', 1409)]    #The first is the var name the second is the value
+  path = "http://lpg.site40.net/lpg_get.php"
+  mydata = [('op','get_timestamp')]    #The first is the var name the second is the value
+
   mydata = urllib.urlencode(mydata)
-  p2 = "http://lpg.site40.net/lpg_get.php"
-  req = urllib2.Request(p2, mydata)
-  #req.add_header("Content-type", "application/x-www-form-urlencoded")
+  req = urllib2.Request(path, mydata)
+
   response = urllib2.urlopen(req).read()
   print "------- start response -------- \n", response
   print "------- end response ------- \n",
-  s = response[ : response.find("<")]
+  pos = response.find("<")
+  s = response
+  if pos != -1:
+    s = response[ : response.find("<")]
   print s
 
   data = json.loads(s)
