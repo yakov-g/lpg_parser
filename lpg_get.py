@@ -151,27 +151,26 @@ def main():
 
   mydata=[('op','1'),('time','987654321'), ('json', d)]    #The first is the var name the second is the value
   mydata=urllib.urlencode(mydata)
-  p2 = "http://lpg.site40.net/lpg_db_reload.php"
+  p2 = "http://lpg.site40.net/lpg_get.php"
   req=urllib2.Request(p2, mydata)
   #req.add_header("Content-type", "application/x-www-form-urlencoded")
   page=urllib2.urlopen(req).read()
   print page
 
 def get_data():
-  mydata=[('op','2'), ('id', 1409)]    #The first is the var name the second is the value
-  mydata=urllib.urlencode(mydata)
-  p2 = "http://lpg.site40.net/lpg_db_reload.php"
-  req=urllib2.Request(p2, mydata)
+  mydata = [('op','get_timestamp'), ('id', 1409)]    #The first is the var name the second is the value
+  mydata = urllib.urlencode(mydata)
+  p2 = "http://lpg.site40.net/lpg_get.php"
+  req = urllib2.Request(p2, mydata)
   #req.add_header("Content-type", "application/x-www-form-urlencoded")
-  page=urllib2.urlopen(req).read()
-  print page
-  s = page[ : page.find("<")]
+  response = urllib2.urlopen(req).read()
+  print "------- start response -------- \n", response
+  print "------- end response ------- \n",
+  s = response[ : response.find("<")]
   print s
 
   data = json.loads(s)
-  print data['id']
-  print data['name']
-  print data['time']
+  print data['timestamp']
 
 if __name__ == "__main__":
    #main()
