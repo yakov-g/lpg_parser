@@ -170,7 +170,10 @@ def get_data():
   print s
 
   data = json.loads(s)
-  print data['timestamp']
+  if data['status'] == 1:
+     print data['timestamp']
+  else:
+     print data['message']
 
 if __name__ == "__main__":
    #main()
