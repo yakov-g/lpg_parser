@@ -179,6 +179,34 @@ def get_data():
   else:
      print data['message']
 
+def get_data2():
+  path = "http://lpg.site40.net/lpg_get.php"
+  mydata = [('op','get_all')]    #The first is the var name the second is the value
+
+  mydata = urllib.urlencode(mydata)
+  req = urllib2.Request(path, mydata)
+
+  response = urllib2.urlopen(req).read()
+  print "------- start response -------- \n", response
+  print "------- end response ------- \n",
+  pos = response.find("<")
+  s = response
+  if pos != -1:
+    s = response[ : response.find("<")]
+
+  data = json.loads(s)
+  db_data = None
+  if data['status'] == 1:
+     db_data = data['data']
+  else:
+     print data['message']
+
+  if db_data:
+     for it in db_data:
+        print it['id'], it['name']
+
+
+
 if __name__ == "__main__":
    #main()
-   get_data()
+   get_data2()
